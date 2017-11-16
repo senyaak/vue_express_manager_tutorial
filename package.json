@@ -1,0 +1,32 @@
+{
+  "name": "focus-budget-manager",
+  "version": "0.1.1",
+  "description": "vue+express tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Senyaak",
+  "license": "ISC",
+  "repository": "coming soon...",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "consign": "^0.1.6",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "module-alias": "^2.0.2",
+    "mongoose": "^4.13.3",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-develop-server": "^0.5.2",
+    "gulp-typescript": "^3.2.3",
+    "typescript": "^2.6.1"
+  }
+}
