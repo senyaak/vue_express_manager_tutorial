@@ -5,16 +5,19 @@ var server = require("gulp-develop-server");
 var path = require("path");
 
 var tsConfServer = {
-  target: "es6",
+  target: "es2015",
   module: "commonjs",
   moduleResolution: "node",
-  noImplicitAny: true,
+  noImplicitAny: false,
 };
 var globalTypes = [
   "typings/**/*.d.ts",
   "node_modules/@types/**/*.d.ts",
   "node_modules/@types/*.d.ts",
 ]
+
+gulp.task("default", ["compile"], () => {
+});
 
 gulp.task("compile", ["clean"], function () {
   return gulp.src(globalTypes.concat([
