@@ -1,4 +1,8 @@
-export default (mongoose, config) => {
+import * as mongoose from "mongoose";
+import * as config from "./index";
+import * as Models from "./../app/model/user";
+
+export default (mongoose: mongoose.Mongoose) => {
   const database = mongoose.connection;
   mongoose.Promise = Promise;
   mongoose.connect(config.database, {

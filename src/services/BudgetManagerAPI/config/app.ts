@@ -5,18 +5,23 @@ import * as morgan from "morgan";
 import * as cors from "cors";
 import * as passport from "passport";
 import * as jwt from "jsonwebtoken";
+
+import * as setup from "./../app/setup/index";
 import * as config from "./index.js";
-import passportInit from "./passport";
+import UserRoute from "./../app/routes/user";
+import AuthRoute from "./../app/routes/auth";
+import passportInit from "./passport-conf";
 import databaseInit from "./database";
+
 const passportConfig = passportInit(passport);
-const database = databaseInit(mongoose, config);
+const database = databaseInit(mongoose);
 
 const app = express();
-
 
 app.use(express.static('.'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.raw());
 app.use(morgan('dev'));
 app.use(cors());
 //  instead of cors
@@ -27,3 +32,10 @@ app.use(cors());
 //});
 app.use(passportConfig.initialize());
 app.set('budgetsecret', config.secret);
+
+// define routes
+UserRoute(app);
+AuthRoute(app);
+
+
+export default app;

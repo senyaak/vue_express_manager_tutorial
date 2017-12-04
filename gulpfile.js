@@ -25,11 +25,11 @@ gulp.task("compile", ["clean"], function () {
     "src/*.ts",
   ]))
     .pipe(ts(tsConfServer))
-    .js.pipe(gulp.dest("built/"));
+    .js.pipe(gulp.dest("build/"));
 });
 
 gulp.task("watch", ["compile"], function () {
-  server.listen({path: "./built/services/index.js"});
+  server.listen({path: "./build/services/BudgetManagerAPI/index.js"});
   gulp.watch(["./index.js"], server.restart);
   var watcher = gulp.watch(
     ["src/**/*", "src/**/*", "public/**/*"],
@@ -47,6 +47,6 @@ gulp.task("server:restart", ["default"], function () {
 });
 
 gulp.task("clean", function () {
-  return gulp.src("built", {read: false})
+  return gulp.src("build", {read: false})
     .pipe(clean({force: true}));
 });

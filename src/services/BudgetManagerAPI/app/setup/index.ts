@@ -1,5 +1,7 @@
 import * as mongoose from "mongoose";
-import {User} from "./../model/user";
+import "./../model/user";
+import {IUser} from "./../model/user";
+
 export const models = {
-  User: mongoose.model('User')
+  User: mongoose.model<IUser>('User'),
 }

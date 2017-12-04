@@ -1,10 +1,10 @@
 import * as mongoose from "mongoose";
 import * as bcrypt from "bcrypt";
 
-interface IUser extends mongoose.Document{
-  username: string;
-  password: string;
-  clients: IClient[];
+export type UserModel = mongoose.Model<IUser>;
+
+export interface IUser extends mongoose.Document{
+  comparePassword(password: string): Promise<boolean>;
 }
 
 interface IClient {
@@ -19,7 +19,7 @@ interface IBudget {
   title: string;
   price: number;
 }
-const Schema = new mongoose.Schema({
+export const UserSchema: mongoose.Schema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
@@ -32,7 +32,7 @@ const Schema = new mongoose.Schema({
   clients: [{}]
 });
 
-Schema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
   const user = this;
   if (this.isModified('password') || this.isNew) {
     bcrypt.genSalt(10, (error, salt) => {
@@ -52,11 +52,8 @@ Schema.pre('save', function (next) {
   }
 });
 
-Schema.methods.comparePassword = function (password: string, callback: (err?: Error, matches?: boolean) => void) {
-  bcrypt.compare(password, this.password, (error, matches) => {
-    if (error) return callback(error);
-    callback(null, matches);
-  });
+UserSchema.methods.comparePassword = function (password: string): Promise<boolean> {
+  return bcrypt.compare(password, this.password);
 };
 
-export const User: mongoose.Model<IUser> = mongoose.model<IUser>("User", Schema);
+export const User: mongoose.Model<IUser> = mongoose.model<IUser>("User", UserSchema);
