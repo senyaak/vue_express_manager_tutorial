@@ -10,6 +10,7 @@ import * as setup from "./../app/setup/index";
 import * as config from "./index.js";
 import UserRoute from "./../app/routes/user";
 import AuthRoute from "./../app/routes/auth";
+import StaticRoute from "./../app/routes/static";
 import passportInit from "./passport-conf";
 import databaseInit from "./database";
 
@@ -36,6 +37,7 @@ app.set('budgetsecret', config.secret);
 // define routes
 UserRoute(app);
 AuthRoute(app);
+StaticRoute(app);
 
 
 export default app;
