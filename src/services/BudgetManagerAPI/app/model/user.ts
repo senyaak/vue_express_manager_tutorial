@@ -4,32 +4,21 @@ import * as bcrypt from "bcrypt";
 export type UserModel = mongoose.Model<IUser>;
 
 export interface IUser extends mongoose.Document{
+  username: string;
+  password: string;
   comparePassword(password: string): Promise<boolean>;
 }
 
-interface IClient {
-  email: string;
-  name: string;
-  phone: string;
-  Budgets: IBudget[];
-}
-
-interface IBudget {
-  state: string;
-  title: string;
-  price: number;
-}
 export const UserSchema: mongoose.Schema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   password: {
     type: String,
     required: true
   },
-  clients: [{}]
 });
 
 UserSchema.pre('save', function (next) {
@@ -56,4 +45,4 @@ UserSchema.methods.comparePassword = function (password: string): Promise<boolea
   return bcrypt.compare(password, this.password);
 };
 
-export const User: mongoose.Model<IUser> = mongoose.model<IUser>("User", UserSchema);
+export const User: UserModel = mongoose.model<IUser>("User", UserSchema);

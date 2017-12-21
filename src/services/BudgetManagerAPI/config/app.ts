@@ -11,6 +11,8 @@ import * as config from "./index.js";
 import UserRoute from "./../app/routes/user";
 import AuthRoute from "./../app/routes/auth";
 import StaticRoute from "./../app/routes/static";
+import BudgetRoute from "./../app/routes/budget";
+import ClientRoute from "./../app/routes/client";
 import passportInit from "./passport-conf";
 import databaseInit from "./database";
 
@@ -38,6 +40,7 @@ app.set('budgetsecret', config.secret);
 UserRoute(app);
 AuthRoute(app);
 StaticRoute(app);
-
+BudgetRoute(app);
+ClientRoute(app);
 
 export default app;
