@@ -5,7 +5,7 @@ import {User} from "../app/model/user";
 const ExtractJWT = PassportJWT.ExtractJwt;
 const Strategy = PassportJWT.Strategy;
 
-export default (passport: passport.Passport) => {
+export default (passport: passport.PassportStatic) => {
   const parameters = {
     secretOrKey: config.secret,
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
