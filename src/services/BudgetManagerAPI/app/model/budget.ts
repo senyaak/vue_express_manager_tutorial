@@ -8,6 +8,7 @@ export interface IBudget extends mongoose.Document{
   title: string;
   total_price: number;
   client_id: mongoose.Schema.Types.ObjectId;
+  description: String;
 }
 
 export const BudgetSchema: mongoose.Schema = new mongoose.Schema({
@@ -36,6 +37,15 @@ export const BudgetSchema: mongoose.Schema = new mongoose.Schema({
     ref: "Client"
   },
 
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+
+  description: {
+    type: String,
+    required: true
+  },
   items: [{}]
 });
 
